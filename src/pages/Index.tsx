@@ -1,11 +1,71 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useCallback } from 'react';
+import DigitalClock from '@/components/DigitalClock';
+import HoldButton from '@/components/HoldButton';
 
 const Index = () => {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'processing' | 'success'>('idle');
+
+  const handleLogin = useCallback(() => {
+    if (!email.trim()) return;
+    
+    setStatus('processing');
+    
+    // Simulate authentication
+    setTimeout(() => {
+      setStatus('success');
+    }, 800);
+  }, [email]);
+
+  const isValidEmail = email.includes('@') && email.includes('.');
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <div className="w-full max-w-sm">
+        <div className="card-ritual">
+          {/* Clock */}
+          <div className="flex justify-center mb-12">
+            <DigitalClock />
+          </div>
+
+          {/* Form */}
+          <div className="space-y-6">
+            <div>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email address"
+                className="input-minimal"
+                disabled={status !== 'idle'}
+                autoComplete="email"
+                autoFocus
+              />
+            </div>
+
+            <HoldButton 
+              onComplete={handleLogin}
+              holdDuration={2000}
+              disabled={!isValidEmail || status !== 'idle'}
+            >
+              {status === 'idle' && 'Hold to authenticate'}
+              {status === 'processing' && 'Verifying...'}
+              {status === 'success' && 'Access granted'}
+            </HoldButton>
+
+            {/* Microcopy */}
+            <p className="text-center text-sm text-whisper leading-relaxed">
+              {status === 'idle' && 'Take a moment. Timing matters.'}
+              {status === 'processing' && 'One moment, please.'}
+              {status === 'success' && 'Welcome back.'}
+            </p>
+          </div>
+        </div>
+
+        {/* Footer whisper */}
+        <p className="text-center text-xs text-whisper mt-8 opacity-60">
+          Designed for humans
+        </p>
       </div>
     </div>
   );
