@@ -188,6 +188,25 @@
     to { transform: scaleX(1); }
   }
 
+  .bg-geometric {
+    background-image: 
+      radial-gradient(circle at 1px 1px, hsl(220 10% 88%) 1px, transparent 0);
+    background-size: 32px 32px;
+  }
+
+  .bg-geometric-lines {
+    background-image: 
+      linear-gradient(to right, hsl(220 10% 94%) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(220 10% 94%) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .bg-geometric-hex {
+    background-color: hsl(0 0% 100%);
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L55 17.5V42.5L30 55L5 42.5V17.5L30 5z' fill='none' stroke='%23e8eaed' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-size: 60px 60px;
+  }
+
   .animate-progress {
     animation: progress-fill var(--hold-duration, 2s) linear forwards;
   }

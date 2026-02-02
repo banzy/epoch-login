@@ -20,8 +20,11 @@ const Index = () => {
   const isValidEmail = email.includes('@') && email.includes('.');
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6">
-      <div className="w-full max-w-sm">
+    <div className="relative min-h-screen flex items-center justify-center p-6">
+      {/* Geometric background pattern */}
+      <div className="fixed inset-0 bg-geometric opacity-60 pointer-events-none" />
+      
+      <div className="relative z-10 w-full max-w-sm">
         <div className="card-ritual">
           {/* Clock */}
           <div className="flex justify-center mb-12">
