@@ -190,8 +190,8 @@
 
   .bg-geometric {
     background-image: 
-      radial-gradient(circle at 1px 1px, hsl(220 10% 88%) 1px, transparent 0);
-    background-size: 32px 32px;
+      radial-gradient(circle at 2px 2px, hsl(220 15% 75%) 2px, transparent 0);
+    background-size: 28px 28px;
   }
 
   .bg-geometric-lines {
