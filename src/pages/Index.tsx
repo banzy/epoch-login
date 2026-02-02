@@ -22,7 +22,7 @@ const Index = () => {
   return (
     <div className="relative min-h-screen flex items-center justify-center p-6">
       {/* Geometric background pattern */}
-      <div className="fixed inset-0 bg-geometric opacity-60 pointer-events-none" />
+      <div className="fixed inset-0 bg-geometric pointer-events-none" />
       
       <div className="relative z-10 w-full max-w-sm">
         <div className="card-ritual">
