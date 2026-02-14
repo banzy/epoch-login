@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import DigitalClock from '@/components/DigitalClock';
 import HoldButton from '@/components/HoldButton';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const Index = () => {
   const [email, setEmail] = useState('');
@@ -21,9 +22,10 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center p-6">
-      {/* Geometric background pattern */}
-      <div className="fixed inset-0 bg-geometric pointer-events-none" />
-      
+      <ThemeToggle />
+      {/* Geometric background pattern (light) / Gradient waves (dark) */}
+      <div className="fixed inset-0 bg-geometric dark:bg-none pointer-events-none" />
+      <div className="fixed inset-0 hidden dark:block pointer-events-none bg-dark-waves" />
       <div className="relative z-10 w-full max-w-sm">
         <div className="card-ritual">
           {/* Clock */}
