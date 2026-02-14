@@ -16,7 +16,7 @@ const DigitalClock = () => {
   const seconds = time.getSeconds().toString().padStart(2, '0');
 
   return (
-    <div className="font-clock font-medium tracking-tight select-none flex items-baseline justify-center">
+    <div className="font-clock font-medium tracking-tight select-none flex items-baseline justify-center clock-enter">
       <span className="clock-digit text-clock-primary text-6xl md:text-7xl">{hours}</span>
       <span className="clock-separator text-6xl md:text-7xl mx-1">:</span>
       <span className="clock-digit text-clock-primary text-6xl md:text-7xl">{minutes}</span>
