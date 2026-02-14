@@ -61,33 +61,50 @@
   }
 
   .dark {
-    --background: 220 15% 8%;
-    --foreground: 220 10% 95%;
+    --background: 225 20% 7%;
+    --foreground: 220 10% 92%;
 
-    --card: 220 15% 10%;
-    --card-foreground: 220 10% 95%;
+    --card: 225 18% 11%;
+    --card-foreground: 220 10% 92%;
 
-    --popover: 220 15% 10%;
-    --popover-foreground: 220 10% 95%;
+    --popover: 225 18% 11%;
+    --popover-foreground: 220 10% 92%;
 
     --primary: 210 100% 60%;
-    --primary-foreground: 220 15% 8%;
+    --primary-foreground: 225 20% 7%;
 
-    --secondary: 220 15% 15%;
-    --secondary-foreground: 220 10% 80%;
+    --secondary: 225 15% 16%;
+    --secondary-foreground: 220 10% 75%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 220 10% 55%;
+    --muted: 225 15% 16%;
+    --muted-foreground: 220 10% 50%;
 
     --accent: 210 100% 55%;
-    --accent-foreground: 220 15% 8%;
+    --accent-foreground: 225 20% 7%;
 
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 18%;
-    --input: 220 15% 18%;
+    --border: 225 15% 18%;
+    --input: 225 15% 18%;
     --ring: 210 100% 60%;
+
+    --clock-primary: 220 10% 88%;
+    --clock-seconds: 210 100% 60%;
+    --clock-separator: 220 10% 40%;
+
+    --input-bg: 225 15% 14%;
+    --input-border: 225 15% 22%;
+    --input-focus: 210 100% 55%;
+
+    --button-hold-bg: 225 15% 16%;
+    --button-hold-progress: 210 100% 55%;
+
+    --text-whisper: 220 10% 45%;
+    --text-subtle: 220 10% 60%;
+
+    --shadow-soft: 0 2px 20px -4px hsl(210 100% 50% / 0.08);
+    --shadow-card: 0 4px 40px -8px hsl(210 100% 50% / 0.12);
   }
 }
 
@@ -147,6 +164,10 @@
 
   .hold-button:hover {
     background: hsl(220 10% 93%);
+  }
+
+  .dark .hold-button:hover {
+    background: hsl(225 15% 20%);
   }
 
   .hold-button:active {
@@ -209,5 +230,28 @@
 
   .animate-progress {
     animation: progress-fill var(--hold-duration, 2s) linear forwards;
+  }
+
+  @keyframes wave-drift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .bg-dark-waves {
+    background: 
+      radial-gradient(ellipse at 20% 50%, hsl(210 100% 50% / 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, hsl(250 80% 55% / 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, hsl(200 90% 45% / 0.07) 0%, transparent 50%),
+      linear-gradient(
+        180deg,
+        hsl(225 20% 7%) 0%,
+        hsl(225 25% 10%) 30%,
+        hsl(220 30% 12%) 50%,
+        hsl(225 25% 10%) 70%,
+        hsl(225 20% 7%) 100%
+      );
+    background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
+    animation: wave-drift 15s ease-in-out infinite;
   }
 }
