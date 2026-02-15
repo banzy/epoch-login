@@ -261,26 +261,66 @@
     animation: progress-fill var(--hold-duration, 2s) linear forwards;
   }
 
-  @keyframes wave-drift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  @keyframes beam-pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes char-fall {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
   }
 
   .bg-dark-waves {
-    background: 
-      radial-gradient(ellipse at 20% 50%, hsl(210 100% 50% / 0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, hsl(250 80% 55% / 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 80%, hsl(200 90% 45% / 0.07) 0%, transparent 50%),
-      linear-gradient(
-        180deg,
-        hsl(225 20% 7%) 0%,
-        hsl(225 25% 10%) 30%,
-        hsl(220 30% 12%) 50%,
-        hsl(225 25% 10%) 70%,
-        hsl(225 20% 7%) 100%
-      );
-    background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
-    animation: wave-drift 15s ease-in-out infinite;
+    background: hsl(225 20% 7%);
+    overflow: hidden;
+  }
+
+  /* Central vertical light beam */
+  .bg-dark-waves::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 140%;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      hsl(190 100% 70% / 0.6) 20%,
+      hsl(190 100% 80% / 0.9) 50%,
+      hsl(190 100% 70% / 0.6) 80%,
+      transparent 100%
+    );
+    box-shadow: 
+      0 0 20px 8px hsl(190 100% 70% / 0.3),
+      0 0 60px 20px hsl(190 100% 60% / 0.15),
+      0 0 120px 40px hsl(190 100% 50% / 0.08);
+    animation: beam-pulse 4s ease-in-out infinite;
+    z-index: 1;
+  }
+
+  /* Ambient glow around beam */
+  .bg-dark-waves::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 30% 70% at 50% 50%, hsl(190 100% 50% / 0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, hsl(190 80% 40% / 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 30%, hsl(160 60% 40% / 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 60%, hsl(220 60% 40% / 0.04) 0%, transparent 50%);
+    z-index: 0;
+  }
+
+  /* Matrix character overlay via repeating background */
+  .dark-matrix-chars {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cstyle%3Etext%7Bfont-family:monospace;font-size:10px;fill:%2340806a;opacity:0.15%7D%3C/style%3E%3Ctext x='10' y='15'%3EY%3C/text%3E%3Ctext x='50' y='30'%3EC%3C/text%3E%3Ctext x='90' y='12'%3EK%3C/text%3E%3Ctext x='130' y='45'%3EH%3C/text%3E%3Ctext x='170' y='25'%3ET%3C/text%3E%3Ctext x='25' y='55'%3EW%3C/text%3E%3Ctext x='65' y='70'%3EA%3C/text%3E%3Ctext x='105' y='60'%3EN%3C/text%3E%3Ctext x='145' y='80'%3ED%3C/text%3E%3Ctext x='185' y='65'%3ES%3C/text%3E%3Ctext x='15' y='95'%3EO%3C/text%3E%3Ctext x='55' y='110'%3EU%3C/text%3E%3Ctext x='95' y='100'%3EB%3C/text%3E%3Ctext x='135' y='120'%3EV%3C/text%3E%3Ctext x='175' y='105'%3EG%3C/text%3E%3Ctext x='30' y='140'%3EL%3C/text%3E%3Ctext x='70' y='155'%3EF%3C/text%3E%3Ctext x='110' y='145'%3EP%3C/text%3E%3Ctext x='150' y='165'%3ER%3C/text%3E%3Ctext x='190' y='150'%3EI%3C/text%3E%3Ctext x='20' y='180'%3EQ%3C/text%3E%3Ctext x='60' y='195'%3EX%3C/text%3E%3Ctext x='100' y='185'%3EJ%3C/text%3E%3Ctext x='140' y='198'%3EM%3C/text%3E%3Ctext x='180' y='190'%3EZ%3C/text%3E%3Ctext x='40' y='42'%3ET%3C/text%3E%3Ctext x='80' y='88'%3EE%3C/text%3E%3Ctext x='120' y='135'%3EA%3C/text%3E%3Ctext x='160' y='48'%3EY%3C/text%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    opacity: 0.6;
+    z-index: 0;
   }
 }
