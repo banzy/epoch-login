@@ -247,68 +247,9 @@
     z-index: 1;
   }
 
-  /* Vertical beam - light theme */
-  .beam-vertical-light {
-    position: relative;
-    overflow: hidden;
-  }
-  .beam-vertical-light::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: -20%;
-    width: 1px;
-    height: 140%;
-    transform: translateX(-50%) scaleX(1);
-    transform-origin: center;
-    will-change: transform, opacity;
-    background: linear-gradient(
-      180deg,
-      transparent 0%,
-      hsl(220 60% 60% / 0.3) 30%,
-      hsl(220 60% 65% / 0.5) 50%,
-      hsl(220 60% 60% / 0.3) 70%,
-      transparent 100%
-    );
-    animation: beam-pulse-v 30s ease-in-out infinite;
-    z-index: 1;
-  }
-
-  /* Vertical beam - dark theme */
-  .beam-vertical-dark {
-    position: relative;
-    overflow: hidden;
-  }
-  .beam-vertical-dark::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: -20%;
-    width: 1px;
-    height: 140%;
-    transform: translateX(-50%) scaleX(1);
-    transform-origin: center;
-    will-change: transform, opacity;
-    background: linear-gradient(
-      180deg,
-      transparent 0%,
-      hsl(190 100% 70% / 0.5) 30%,
-      hsl(190 100% 80% / 0.8) 50%,
-      hsl(190 100% 70% / 0.5) 70%,
-      transparent 100%
-    );
-    animation: beam-pulse-v 30s ease-in-out infinite;
-    z-index: 1;
-  }
-
   @keyframes beam-pulse-h {
     0%, 100% { opacity: 1; transform: translateY(-50%) scaleY(1); }
     50% { opacity: 0.3; transform: translateY(-50%) scaleY(120); }
-  }
-
-  @keyframes beam-pulse-v {
-    0%, 100% { opacity: 1; transform: translateX(-50%) scaleX(1); }
-    50% { opacity: 0.3; transform: translateX(-50%) scaleX(120); }
   }
 
   .bg-geometric-lines {
