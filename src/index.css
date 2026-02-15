@@ -241,7 +241,7 @@
     box-shadow: 
       0 0 20px 8px hsl(220 60% 60% / 0.15),
       0 0 60px 20px hsl(220 60% 50% / 0.08);
-    animation: beam-pulse 8s ease-in-out infinite;
+    animation: beam-pulse 80s ease-in-out infinite;
     z-index: 1;
   }
 
@@ -257,7 +257,7 @@
     );
     mask-image: linear-gradient(90deg, transparent 0%, black 48%, black 52%, transparent 100%);
     -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 48%, black 52%, transparent 100%);
-    animation: beam-pulse-vertical 8s ease-in-out infinite;
+    animation: beam-pulse-vertical 80s ease-in-out infinite;
     z-index: 1;
   }
 
@@ -273,7 +273,7 @@
     );
     mask-image: linear-gradient(90deg, transparent 0%, black 48%, black 52%, transparent 100%);
     -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 48%, black 52%, transparent 100%);
-    animation: beam-pulse-vertical 8s ease-in-out infinite;
+    animation: beam-pulse-vertical 80s ease-in-out infinite;
     z-index: 1;
   }
 
@@ -359,7 +359,7 @@
       0 0 30px 12px hsl(190 100% 70% / 0.35),
       0 0 80px 30px hsl(190 100% 60% / 0.2),
       0 0 160px 60px hsl(190 100% 50% / 0.1);
-    animation: beam-pulse 8s ease-in-out infinite;
+    animation: beam-pulse 80s ease-in-out infinite;
     z-index: 1;
   }
 
