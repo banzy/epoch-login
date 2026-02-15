@@ -25,11 +25,9 @@ const Index = () => {
       <ThemeToggle />
       {/* Geometric background pattern (light) / Gradient waves (dark) */}
       <div className="fixed inset-0 bg-geometric dark:bg-none pointer-events-none" />
-      <div className="fixed inset-0 pointer-events-none beam-vertical-light dark:hidden" />
       <div className="fixed inset-0 hidden dark:block pointer-events-none bg-dark-waves">
         <div className="dark-matrix-chars" />
       </div>
-      <div className="fixed inset-0 hidden dark:block pointer-events-none beam-vertical-dark" />
       <div className="relative z-10 w-full max-w-sm">
         <div className="card-ritual">
           {/* Clock */}
