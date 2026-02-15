@@ -245,6 +245,43 @@
     z-index: 1;
   }
 
+  /* Vertical beam - light theme */
+  .beam-vertical-light {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      hsl(220 60% 60% / 0.3) 30%,
+      hsl(220 60% 65% / 0.5) 50%,
+      hsl(220 60% 60% / 0.3) 70%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(90deg, transparent 0%, black 48%, black 52%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 48%, black 52%, transparent 100%);
+    animation: beam-pulse-vertical 8s ease-in-out infinite;
+    z-index: 1;
+  }
+
+  /* Vertical beam - dark theme */
+  .beam-vertical-dark {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      hsl(190 100% 70% / 0.5) 30%,
+      hsl(190 100% 80% / 0.8) 50%,
+      hsl(190 100% 70% / 0.5) 70%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(90deg, transparent 0%, black 48%, black 52%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 48%, black 52%, transparent 100%);
+    animation: beam-pulse-vertical 8s ease-in-out infinite;
+    z-index: 1;
+  }
+
+  @keyframes beam-pulse-vertical {
+    0%, 100% { opacity: 1; mask-size: 4px 100%; -webkit-mask-size: 4px 100%; }
+    50% { opacity: 0.3; mask-size: 120px 100%; -webkit-mask-size: 120px 100%; }
+  }
+
   .bg-geometric-lines {
     background-image: 
       linear-gradient(to right, hsl(220 10% 94%) 1px, transparent 1px),
