@@ -218,6 +218,31 @@
     background-image: 
       radial-gradient(circle at 2px 2px, hsl(220 15% 75%) 2px, transparent 0);
     background-size: 28px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bg-geometric::before {
+    content: '';
+    position: absolute;
+    left: -20%;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2px;
+    width: 140%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(220 60% 60% / 0.4) 20%,
+      hsl(220 60% 65% / 0.6) 50%,
+      hsl(220 60% 60% / 0.4) 80%,
+      transparent 100%
+    );
+    box-shadow: 
+      0 0 20px 8px hsl(220 60% 60% / 0.15),
+      0 0 60px 20px hsl(220 60% 50% / 0.08);
+    animation: beam-pulse 8s ease-in-out infinite;
+    z-index: 1;
   }
 
   .bg-geometric-lines {
@@ -262,8 +287,8 @@
   }
 
   @keyframes beam-pulse {
-    0%, 100% { opacity: 1; width: 2px; }
-    50% { opacity: 0.3; width: 120px; }
+    0%, 100% { opacity: 1; height: 2px; }
+    50% { opacity: 0.3; height: 120px; }
   }
 
   @keyframes char-fall {
@@ -276,17 +301,17 @@
     overflow: hidden;
   }
 
-  /* Central vertical light beam */
+  /* Central horizontal light beam */
   .bg-dark-waves::before {
     content: '';
     position: absolute;
-    top: -20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 2px;
-    height: 140%;
+    left: -20%;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2px;
+    width: 140%;
     background: linear-gradient(
-      180deg,
+      90deg,
       transparent 0%,
       hsl(190 100% 70% / 0.6) 20%,
       hsl(190 100% 80% / 0.9) 50%,
