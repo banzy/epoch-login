@@ -262,8 +262,8 @@
   }
 
   @keyframes beam-pulse {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
+    0%, 100% { opacity: 0.5; width: 2px; }
+    50% { opacity: 1; width: 6px; }
   }
 
   @keyframes char-fall {
@@ -294,9 +294,9 @@
       transparent 100%
     );
     box-shadow: 
-      0 0 20px 8px hsl(190 100% 70% / 0.3),
-      0 0 60px 20px hsl(190 100% 60% / 0.15),
-      0 0 120px 40px hsl(190 100% 50% / 0.08);
+      0 0 30px 12px hsl(190 100% 70% / 0.35),
+      0 0 80px 30px hsl(190 100% 60% / 0.2),
+      0 0 160px 60px hsl(190 100% 50% / 0.1);
     animation: beam-pulse 4s ease-in-out infinite;
     z-index: 1;
   }
