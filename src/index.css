@@ -233,8 +233,8 @@
 
   .bg-geometric {
     background-image: 
-      radial-gradient(circle at 2px 2px, hsl(220 15% 75%) 2px, transparent 0);
-    background-size: 28px 28px;
+      radial-gradient(circle at 2px 2px, hsl(220 12% 80%) 1.2px, transparent 0);
+    background-size: 26px 26px;
     position: relative;
     overflow: hidden;
   }
