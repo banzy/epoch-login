@@ -235,14 +235,14 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(220 60% 60% / 0.4) 20%,
-      hsl(220 60% 65% / 0.6) 50%,
-      hsl(220 60% 60% / 0.4) 80%,
+      hsl(220 90% 55% / 0.6) 20%,
+      hsl(220 95% 60% / 0.85) 50%,
+      hsl(220 90% 55% / 0.6) 80%,
       transparent 100%
     );
     box-shadow: 
-      0 0 20px 8px hsl(220 60% 60% / 0.15),
-      0 0 60px 20px hsl(220 60% 50% / 0.08);
+      0 0 20px 8px hsl(220 90% 55% / 0.25),
+      0 0 60px 20px hsl(220 90% 50% / 0.15);
     animation: beam-pulse-h 30s ease-in-out infinite;
     z-index: 1;
   }
@@ -322,15 +322,15 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(190 100% 70% / 0.6) 20%,
-      hsl(190 100% 80% / 0.9) 50%,
-      hsl(190 100% 70% / 0.6) 80%,
+      hsl(200 100% 60% / 0.8) 20%,
+      hsl(200 100% 65% / 1) 50%,
+      hsl(200 100% 60% / 0.8) 80%,
       transparent 100%
     );
     box-shadow: 
-      0 0 30px 12px hsl(190 100% 70% / 0.35),
-      0 0 80px 30px hsl(190 100% 60% / 0.2),
-      0 0 160px 60px hsl(190 100% 50% / 0.1);
+      0 0 30px 12px hsl(200 100% 60% / 0.5),
+      0 0 80px 30px hsl(200 100% 55% / 0.3),
+      0 0 160px 60px hsl(200 100% 50% / 0.15);
     animation: beam-pulse 30s ease-in-out infinite;
     z-index: 1;
   }
