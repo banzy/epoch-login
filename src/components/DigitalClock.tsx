@@ -17,13 +17,13 @@ const DigitalClock = () => {
 
   return (
     <div className="font-clock font-medium tracking-tight select-none flex items-baseline justify-center clock-enter">
-      <span className="clock-digit text-clock-primary text-6xl md:text-7xl">{hours}</span>
-      <span className="clock-separator text-6xl md:text-7xl mx-1">:</span>
-      <span className="clock-digit text-clock-primary text-6xl md:text-7xl">{minutes}</span>
-      <span className="clock-separator text-2xl md:text-3xl mx-1.5 self-end mb-1.5">:</span>
-      <span className="clock-digit clock-seconds text-2xl md:text-3xl self-end mb-1.5">{seconds}</span>
-    </div>
-  );
+      <span className="clock-digit text-clock-primary md:text-7xl text-5xl font-mono">{hours}</span>
+      <span className="clock-separator md:text-7xl mx-1 text-4xl">:</span>
+      <span className="clock-digit text-clock-primary md:text-7xl text-5xl font-mono">{minutes}</span>
+      <span className="clock-separator md:text-3xl mx-1.5 self-end mb-1.5 text-4xl">:</span>
+      <span className="clock-digit clock-seconds md:text-3xl self-end mb-1.5 text-2xl font-mono">{seconds}</span>
+    </div>);
+
 };
 
 export default DigitalClock;
