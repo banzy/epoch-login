@@ -156,6 +156,15 @@
     color: hsl(var(--text-whisper));
   }
 
+  .input-underline {
+    @apply w-full bg-transparent text-base transition-all duration-200 outline-none border-none;
+    color: hsl(var(--foreground));
+  }
+
+  .input-underline::placeholder {
+    color: hsl(var(--text-whisper));
+  }
+
   .hold-button {
     @apply relative w-full py-4 rounded-xl font-medium text-base transition-all duration-200 overflow-hidden select-none;
     background: hsl(var(--button-hold-bg));
