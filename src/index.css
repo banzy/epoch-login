@@ -252,14 +252,14 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(220 90% 55% / 0.6) 20%,
-      hsl(220 95% 60% / 0.85) 50%,
-      hsl(220 90% 55% / 0.6) 80%,
+      hsl(140 80% 50% / 0.6) 20%,
+      hsl(140 85% 55% / 0.85) 50%,
+      hsl(140 80% 50% / 0.6) 80%,
       transparent 100%
     );
     box-shadow: 
-      0 0 20px 8px hsl(220 90% 55% / 0.25),
-      0 0 60px 20px hsl(220 90% 50% / 0.15);
+      0 0 20px 8px hsl(140 80% 50% / 0.25),
+      0 0 60px 20px hsl(140 80% 45% / 0.15);
     animation: beam-pulse-h 30s ease-in-out infinite, rainbow-hue 180s linear infinite;
     z-index: 1;
   }
@@ -316,8 +316,8 @@
   }
 
   @keyframes rainbow-hue {
-    0% { filter: hue-rotate(120deg); }
-    100% { filter: hue-rotate(480deg); }
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
   }
 
   @keyframes char-fall {
@@ -344,15 +344,15 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(200 100% 60% / 0.8) 20%,
-      hsl(200 100% 65% / 1) 50%,
-      hsl(200 100% 60% / 0.8) 80%,
+      hsl(140 100% 55% / 0.8) 20%,
+      hsl(140 100% 60% / 1) 50%,
+      hsl(140 100% 55% / 0.8) 80%,
       transparent 100%
     );
     box-shadow: 
-      0 0 30px 12px hsl(200 100% 60% / 0.5),
-      0 0 80px 30px hsl(200 100% 55% / 0.3),
-      0 0 160px 60px hsl(200 100% 50% / 0.15);
+      0 0 30px 12px hsl(140 100% 55% / 0.5),
+      0 0 80px 30px hsl(140 100% 50% / 0.3),
+      0 0 160px 60px hsl(140 100% 45% / 0.15);
     animation: beam-pulse 30s ease-in-out infinite, rainbow-hue 180s linear infinite;
     z-index: 1;
   }
