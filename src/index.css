@@ -446,36 +446,6 @@
     }
   }
 
-  .bg-geometric {
-    background-image:
-      radial-gradient(circle at 2px 2px, hsl(220 12% 80%) 1.2px, transparent 0);
-    background-size: 26px 26px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .bg-geometric::before {
-    content: '';
-    position: absolute;
-    left: -20%;
-    top: 50%;
-    height: 1px;
-    width: 140%;
-    transform: translateY(-50%);
-    transform-origin: center;
-    will-change: transform, opacity;
-    background: linear-gradient(90deg,
-        transparent 0%,
-        hsla(var(--hue), 80%, 50%, 0.6) 20%,
-        hsla(var(--hue), 85%, 55%, 0.85) 50%,
-        hsla(var(--hue), 80%, 50%, 0.6) 80%,
-        transparent 100%);
-    box-shadow:
-      0 0 20px 8px hsla(var(--hue), 80%, 50%, 0.25),
-      0 0 60px 20px hsla(var(--hue), 80%, 45%, 0.15);
-    z-index: 1;
-  }
-
   @keyframes beam-pulse-h {
 
     0%,
