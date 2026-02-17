@@ -75,7 +75,7 @@ const Index = () => {
               holdDuration={2000}
               disabled={!isValidEmail || status !== 'idle'}
             >
-              {status === 'idle' && 'Hold to Authenticate'}
+              {status === 'idle' && 'Log in'}
               {status === 'processing' && 'Verifying...'}
               {status === 'success' && 'Access Granted'}
             </HoldButton>
