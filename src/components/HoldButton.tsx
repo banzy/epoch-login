@@ -34,20 +34,13 @@ const HoldButton = ({
     }
   }, [holdDuration, onComplete]);
 
-  const handleStart = useCallback(() => {
+  const handleClick = useCallback(() => {
     if (disabled || state !== 'idle') return;
     setState('running');
     setProgress(0);
     startTimeRef.current = Date.now();
     animRef.current = requestAnimationFrame(updateProgress);
   }, [disabled, state, updateProgress]);
-
-  const handleEnd = useCallback(() => {
-    if (state !== 'running') return;
-    cancelAnimationFrame(animRef.current);
-    setState('idle');
-    setProgress(0);
-  }, [state]);
 
   useEffect(() => {
     return () => cancelAnimationFrame(animRef.current);
@@ -81,11 +74,7 @@ const HoldButton = ({
     <div 
       ref={btnRef}
       className={`hold-btn-wrap ${state}`}
-      onMouseDown={handleStart}
-      onMouseUp={handleEnd}
-      onMouseLeave={handleEnd}
-      onTouchStart={handleStart}
-      onTouchEnd={handleEnd}
+      onClick={handleClick}
     >
       <button
         className="hold-btn"
