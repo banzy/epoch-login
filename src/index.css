@@ -166,34 +166,140 @@
     color: hsl(var(--text-whisper));
   }
 
-  .hold-button {
-    @apply relative w-full py-4 rounded-xl font-medium text-base transition-all duration-200 overflow-hidden select-none;
+  /* ═══ Progress Push Button ═══ */
+  .hold-btn-wrap {
+    @apply relative w-full select-none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .hold-btn {
+    @apply relative w-full py-4 rounded-xl font-semibold text-sm tracking-wider uppercase overflow-hidden border-none outline-none;
     background: hsl(var(--button-hold-bg));
+    cursor: pointer;
+    transition: transform 120ms cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 120ms ease;
+    box-shadow:
+      0 2px 0 0 hsl(var(--background)),
+      inset 0 1px 0 hsl(var(--foreground) / 0.06);
+  }
+
+  .hold-btn-wrap:active .hold-btn {
+    transform: translateY(3px);
+    box-shadow: 0 0 0 0 hsl(var(--background)), inset 0 1px 0 hsl(var(--foreground) / 0.04);
+  }
+
+  .hold-btn[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .hold-btn-track {
+    @apply absolute inset-0 rounded-xl;
+    background: hsl(var(--foreground) / 0.03);
+  }
+
+  .hold-btn-fill {
+    @apply absolute inset-0 rounded-xl;
+    background: linear-gradient(90deg, hsl(var(--button-hold-progress) / 0.7) 0%, hsl(var(--button-hold-progress)) 60%, hsl(var(--foreground) / 0.9) 100%);
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
+  .hold-btn-shimmer {
+    @apply absolute inset-0 rounded-xl;
+    transform-origin: left center;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      hsl(var(--foreground) / 0.2) 50%,
+      transparent 100%);
+    background-size: 60% 100%;
+    background-repeat: no-repeat;
+    animation: hold-shimmer 1.2s ease infinite;
+  }
+
+  @keyframes hold-shimmer {
+    0%   { background-position: -60% 0; }
+    100% { background-position: 160% 0; }
+  }
+
+  .hold-btn-ring {
+    @apply absolute inset-0 rounded-xl pointer-events-none;
+    border: 1px solid hsl(var(--foreground) / 0.1);
+    transition: border-color 300ms;
+  }
+
+  .hold-btn-wrap.running .hold-btn-ring {
+    border-color: hsl(var(--button-hold-progress) / 0.3);
+  }
+
+  .hold-btn-wrap.done .hold-btn-ring {
+    border-color: hsl(var(--button-hold-progress) / 0.5);
+  }
+
+  /* ─── Label transitions ─── */
+  .hold-btn-labels {
+    @apply absolute inset-0 flex items-center justify-center pointer-events-none;
+  }
+
+  .hold-lbl {
+    @apply absolute flex items-center gap-2 text-sm font-bold tracking-widest uppercase;
+    transition: opacity 280ms ease, transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .hold-lbl-idle {
     color: hsl(var(--text-subtle));
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  .hold-button:hover {
-    background: hsl(220 10% 93%);
+  .hold-lbl-run {
+    color: hsl(var(--background));
+    opacity: 0;
+    transform: translateY(12px);
   }
 
-  .dark .hold-button:hover {
-    background: hsl(225 15% 20%);
+  .hold-lbl-done {
+    color: hsl(var(--background));
+    opacity: 0;
+    transform: translateY(12px) scale(0.9);
   }
 
-  .hold-button:active {
-    transform: scale(1.015);
-    box-shadow: 0 0 20px hsl(var(--button-hold-progress) / 0.3), 0 0 60px hsl(var(--button-hold-progress) / 0.1);
+  .hold-btn-wrap.running .hold-lbl-idle { opacity: 0; transform: translateY(-12px); }
+  .hold-btn-wrap.running .hold-lbl-run  { opacity: 1; transform: translateY(0); }
+
+  .hold-btn-wrap.done .hold-lbl-idle { opacity: 0; transform: translateY(-12px); }
+  .hold-btn-wrap.done .hold-lbl-run  { opacity: 0; transform: translateY(-12px); }
+  .hold-btn-wrap.done .hold-lbl-done { opacity: 1; transform: translateY(0) scale(1); }
+
+  .hold-pct {
+    @apply text-xs font-semibold opacity-70 tabular-nums;
+    min-width: 36px;
+    text-align: right;
   }
 
-  .hold-button-progress {
-    @apply absolute inset-0 origin-left;
-    background: linear-gradient(90deg, hsl(var(--button-hold-progress) / 0.45), hsl(var(--button-hold-progress) / 0.2));
-    box-shadow: inset 0 0 30px hsl(var(--button-hold-progress) / 0.15);
+  /* ─── Particles ─── */
+  .hold-particles {
+    @apply absolute inset-0 pointer-events-none;
   }
 
-  .hold-button-complete {
-    background: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+  .hold-particle {
+    @apply absolute rounded-full;
+    width: 5px;
+    height: 5px;
+    background: hsl(var(--button-hold-progress));
+    animation: hold-particle-burst 600ms ease-out forwards;
+  }
+
+  @keyframes hold-particle-burst {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(0);
+    }
   }
 
   .text-whisper {
