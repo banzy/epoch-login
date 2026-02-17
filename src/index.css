@@ -9,6 +9,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@property --hue {
+  syntax: '<number>';
+  initial-value: 140;
+  inherits: true;
+}
+
+@keyframes rainbow-cycle {
+  0% {
+    --hue: 0;
+  }
+
+  100% {
+    --hue: 360;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -45,19 +61,21 @@
     --clock-primary: 220 10% 12%;
     --clock-seconds: 210 100% 50%;
     --clock-separator: 220 8% 55%;
-    
+
     --input-bg: 220 10% 98%;
     --input-border: 220 10% 88%;
     --input-focus: 210 100% 50%;
-    
+
     --button-hold-bg: 220 10% 96%;
     --button-hold-progress: 210 100% 50%;
-    
+
     --text-whisper: 220 8% 65%;
     --text-subtle: 220 8% 45%;
 
     --shadow-soft: 0 2px 20px -4px hsl(220 10% 20% / 0.08);
     --shadow-card: 0 4px 40px -8px hsl(220 10% 20% / 0.1);
+
+    animation: rainbow-cycle 30s linear infinite;
   }
 
   .dark {
@@ -137,8 +155,7 @@
   }
 
   .clock-seconds {
-    color: hsl(140 100% 55%);
-    animation: rainbow-hue 180s linear infinite;
+    color: hsl(var(--hue) 100% 55%);
   }
 
   .input-minimal {
@@ -171,8 +188,6 @@
     @apply relative w-full select-none;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    filter: hue-rotate(0deg);
-    animation: rainbow-hue 180s linear infinite;
   }
 
   .hold-btn {
@@ -180,7 +195,7 @@
     background: hsl(var(--button-hold-bg));
     cursor: pointer;
     transition: transform 120ms cubic-bezier(0.34, 1.56, 0.64, 1),
-                box-shadow 120ms ease;
+      box-shadow 120ms ease;
     box-shadow:
       0 2px 0 0 hsl(var(--background)),
       inset 0 1px 0 hsl(var(--foreground) / 0.06);
@@ -203,7 +218,7 @@
 
   .hold-btn-fill {
     @apply absolute inset-0 rounded-xl;
-    background: linear-gradient(90deg, hsl(140 100% 45% / 0.7) 0%, hsl(140 100% 55%) 60%, hsl(140 80% 80%) 100%);
+    background: linear-gradient(90deg, hsla(var(--hue), 100%, 45%, 0.7) 0%, hsla(var(--hue), 100%, 55%, 1) 60%, hsla(var(--hue), 80%, 80%, 1) 100%);
     transform-origin: left center;
     transform: scaleX(0);
   }
@@ -212,17 +227,22 @@
     @apply absolute inset-0 rounded-xl;
     transform-origin: left center;
     background: linear-gradient(90deg,
-      transparent 0%,
-      hsl(var(--foreground) / 0.2) 50%,
-      transparent 100%);
+        transparent 0%,
+        hsl(var(--foreground) / 0.2) 50%,
+        transparent 100%);
     background-size: 60% 100%;
     background-repeat: no-repeat;
     animation: hold-shimmer 1.2s ease infinite;
   }
 
   @keyframes hold-shimmer {
-    0%   { background-position: -60% 0; }
-    100% { background-position: 160% 0; }
+    0% {
+      background-position: -60% 0;
+    }
+
+    100% {
+      background-position: 160% 0;
+    }
   }
 
   .hold-btn-ring {
@@ -267,12 +287,30 @@
     transform: translateY(12px) scale(0.9);
   }
 
-  .hold-btn-wrap.running .hold-lbl-idle { opacity: 0; transform: translateY(-12px); }
-  .hold-btn-wrap.running .hold-lbl-run  { opacity: 1; transform: translateY(0); }
+  .hold-btn-wrap.running .hold-lbl-idle {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
 
-  .hold-btn-wrap.done .hold-lbl-idle { opacity: 0; transform: translateY(-12px); }
-  .hold-btn-wrap.done .hold-lbl-run  { opacity: 0; transform: translateY(-12px); }
-  .hold-btn-wrap.done .hold-lbl-done { opacity: 1; transform: translateY(0) scale(1); }
+  .hold-btn-wrap.running .hold-lbl-run {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hold-btn-wrap.done .hold-lbl-idle {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+
+  .hold-btn-wrap.done .hold-lbl-run {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+
+  .hold-btn-wrap.done .hold-lbl-done {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 
   .hold-pct {
     @apply text-xs font-semibold opacity-70 tabular-nums;
@@ -298,6 +336,7 @@
       opacity: 1;
       transform: translate(-50%, -50%) translate(0, 0) scale(1);
     }
+
     100% {
       opacity: 0;
       transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(0);
@@ -318,7 +357,7 @@
     backdrop-filter: blur(40px) saturate(1.8);
     -webkit-backdrop-filter: blur(40px) saturate(1.8);
     border: 1px solid hsl(var(--border) / 0.4);
-    box-shadow: 
+    box-shadow:
       var(--shadow-card),
       inset 0 0.5px 0 0 hsl(0 0% 100% / 0.25);
     animation: card-enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -331,17 +370,29 @@
 
 @layer utilities {
   @keyframes pulse-subtle {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 0.2; }
+
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+
+    50% {
+      opacity: 0.2;
+    }
   }
 
   @keyframes progress-fill {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
+    from {
+      transform: scaleX(0);
+    }
+
+    to {
+      transform: scaleX(1);
+    }
   }
 
   .bg-geometric {
-    background-image: 
+    background-image:
       radial-gradient(circle at 2px 2px, hsl(220 12% 80%) 1.2px, transparent 0);
     background-size: 26px 26px;
     position: relative;
@@ -355,32 +406,42 @@
     top: 50%;
     height: 1px;
     width: 140%;
-    transform: translateY(-50%) scaleY(1);
+    transform: translateY(-50%);
     transform-origin: center;
     will-change: transform, opacity;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      hsl(140 80% 50% / 0.6) 20%,
-      hsl(140 85% 55% / 0.85) 50%,
-      hsl(140 80% 50% / 0.6) 80%,
-      transparent 100%
-    );
-    box-shadow: 
-      0 0 20px 8px hsl(140 80% 50% / 0.25),
-      0 0 60px 20px hsl(140 80% 45% / 0.15);
-    animation: beam-pulse-h 30s ease-in-out infinite, rainbow-hue 180s linear infinite;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        hsla(var(--hue), 80%, 50%, 0.6) 20%,
+        hsla(var(--hue), 85%, 55%, 0.85) 50%,
+        hsla(var(--hue), 80%, 50%, 0.6) 80%,
+        transparent 100%);
+    box-shadow:
+      0 0 20px 8px hsla(var(--hue), 80%, 50%, 0.25),
+      0 0 60px 20px hsla(var(--hue), 80%, 45%, 0.15);
     z-index: 1;
   }
 
   @keyframes beam-pulse-h {
-    0%, 6.7% { opacity: 1; transform: translateY(-50%) scaleY(1); }
-    53.3% { opacity: 0.3; transform: translateY(-50%) scaleY(120); }
-    100% { opacity: 1; transform: translateY(-50%) scaleY(1); }
+
+    0%,
+    6.7% {
+      opacity: 1;
+      transform: translateY(-50%) scaleY(1);
+    }
+
+    53.3% {
+      opacity: 0.3;
+      transform: translateY(-50%) scaleY(120);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(-50%) scaleY(1);
+    }
   }
 
   .bg-geometric-lines {
-    background-image: 
+    background-image:
       linear-gradient(to right, hsl(220 10% 94%) 1px, transparent 1px),
       linear-gradient(to bottom, hsl(220 10% 94%) 1px, transparent 1px);
     background-size: 48px 48px;
@@ -397,6 +458,7 @@
       opacity: 0;
       transform: translateY(20px) scale(0.97);
     }
+
     100% {
       opacity: 1;
       transform: translateY(0) scale(1);
@@ -409,6 +471,7 @@
       transform: translateY(-10px);
       filter: blur(4px);
     }
+
     100% {
       opacity: 1;
       transform: translateY(0);
@@ -421,19 +484,32 @@
   }
 
   @keyframes beam-pulse {
-    0%, 6.7% { opacity: 1; transform: translateY(-50%) scaleY(1); }
-    53.3% { opacity: 0.3; transform: translateY(-50%) scaleY(120); }
-    100% { opacity: 1; transform: translateY(-50%) scaleY(1); }
-  }
 
-  @keyframes rainbow-hue {
-    0% { filter: hue-rotate(0deg); }
-    100% { filter: hue-rotate(360deg); }
+    0%,
+    6.7% {
+      opacity: 1;
+      transform: translateY(-50%) scaleY(1);
+    }
+
+    53.3% {
+      opacity: 0.3;
+      transform: translateY(-50%) scaleY(120);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(-50%) scaleY(1);
+    }
   }
 
   @keyframes char-fall {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100vh); }
+    0% {
+      transform: translateY(-100%);
+    }
+
+    100% {
+      transform: translateY(100vh);
+    }
   }
 
   .bg-dark-waves {
@@ -449,22 +525,19 @@
     top: 50%;
     height: 1px;
     width: 140%;
-    transform: translateY(-50%) scaleY(1);
+    transform: translateY(-50%);
     transform-origin: center;
     will-change: transform, opacity;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      hsl(140 100% 55% / 0.8) 20%,
-      hsl(140 100% 60% / 1) 50%,
-      hsl(140 100% 55% / 0.8) 80%,
-      transparent 100%
-    );
-    box-shadow: 
-      0 0 30px 12px hsl(140 100% 55% / 0.5),
-      0 0 80px 30px hsl(140 100% 50% / 0.3),
-      0 0 160px 60px hsl(140 100% 45% / 0.15);
-    animation: beam-pulse 30s ease-in-out infinite, rainbow-hue 180s linear infinite;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        hsla(var(--hue), 100%, 55%, 0.8) 20%,
+        hsla(var(--hue), 100%, 60%, 1) 50%,
+        hsla(var(--hue), 100%, 55%, 0.8) 80%,
+        transparent 100%);
+    box-shadow:
+      0 0 30px 12px hsla(var(--hue), 100%, 55%, 0.5),
+      0 0 80px 30px hsla(var(--hue), 100%, 50%, 0.3),
+      0 0 160px 60px hsla(var(--hue), 100%, 45%, 0.15);
     z-index: 1;
   }
 
@@ -474,10 +547,10 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 30% 70% at 50% 50%, hsl(190 100% 50% / 0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 40% at 50% 100%, hsl(190 80% 40% / 0.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 20% 30%, hsl(160 60% 40% / 0.04) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 60%, hsl(220 60% 40% / 0.04) 0%, transparent 50%);
+      radial-gradient(ellipse 30% 70% at 50% 50%, hsla(var(--hue), 100%, 50%, 0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, hsla(var(--hue), 80%, 40%, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 30%, hsla(var(--hue), 60%, 40%, 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 60%, hsla(var(--hue), 60%, 40%, 0.04) 0%, transparent 50%);
     z-index: 0;
   }
 
