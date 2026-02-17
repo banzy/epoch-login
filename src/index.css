@@ -137,7 +137,8 @@
   }
 
   .clock-seconds {
-    color: hsl(var(--clock-seconds));
+    color: hsl(140 100% 55%);
+    animation: rainbow-hue 180s linear infinite;
   }
 
   .input-minimal {
