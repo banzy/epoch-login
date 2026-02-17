@@ -64,7 +64,7 @@ const Index = () => {
             <div className="flex items-start gap-3">
               <Info className="w-4 h-4 text-whisper flex-shrink-0 mt-0.5" />
               <p className="text-sm text-whisper leading-relaxed">
-                {status === 'idle' && 'Access requires temporal synchronization. Hold the key below to verify human presence.'}
+                {status === 'idle' && 'Secure logging system'}
                 {status === 'processing' && 'Temporal verification in progress.'}
                 {status === 'success' && 'Identity confirmed. Welcome back.'}
               </p>
