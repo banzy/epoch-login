@@ -252,15 +252,14 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(140 90% 45% / 0.9) 20%,
-      hsl(140 95% 50% / 1) 50%,
-      hsl(140 90% 45% / 0.9) 80%,
+      hsl(140 80% 50% / 0.6) 20%,
+      hsl(140 85% 55% / 0.85) 50%,
+      hsl(140 80% 50% / 0.6) 80%,
       transparent 100%
     );
     box-shadow: 
-      0 0 30px 12px hsl(140 90% 45% / 0.5),
-      0 0 80px 30px hsl(140 90% 40% / 0.3),
-      0 0 160px 60px hsl(140 90% 40% / 0.15);
+      0 0 20px 8px hsl(140 80% 50% / 0.25),
+      0 0 60px 20px hsl(140 80% 45% / 0.15);
     animation: beam-pulse-h 30s ease-in-out infinite, rainbow-hue 180s linear infinite;
     z-index: 1;
   }
