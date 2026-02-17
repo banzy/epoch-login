@@ -129,11 +129,6 @@
   .clock-digit {
     @apply inline-block tabular-nums;
     min-width: 1ch;
-    background: linear-gradient(180deg, hsl(140 100% 55%), hsl(140 80% 40%));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: rainbow-hue 180s linear infinite;
   }
 
   .clock-separator {
