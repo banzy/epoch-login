@@ -374,8 +374,9 @@
   }
 
   @keyframes beam-pulse-h {
-    0%, 100% { opacity: 1; transform: translateY(-50%) scaleY(1); }
-    50% { opacity: 0.3; transform: translateY(-50%) scaleY(120); }
+    0%, 6.7% { opacity: 1; transform: translateY(-50%) scaleY(1); }
+    53.3% { opacity: 0.3; transform: translateY(-50%) scaleY(120); }
+    100% { opacity: 1; transform: translateY(-50%) scaleY(1); }
   }
 
   .bg-geometric-lines {
@@ -420,8 +421,9 @@
   }
 
   @keyframes beam-pulse {
-    0%, 100% { opacity: 1; transform: translateY(-50%) scaleY(1); }
-    50% { opacity: 0.3; transform: translateY(-50%) scaleY(120); }
+    0%, 6.7% { opacity: 1; transform: translateY(-50%) scaleY(1); }
+    53.3% { opacity: 0.3; transform: translateY(-50%) scaleY(120); }
+    100% { opacity: 1; transform: translateY(-50%) scaleY(1); }
   }
 
   @keyframes rainbow-hue {
