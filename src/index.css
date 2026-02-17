@@ -236,6 +236,7 @@
       radial-gradient(circle at 2px 2px, hsl(220 12% 80%) 1.2px, transparent 0);
     background-size: 26px 26px;
     position: relative;
+    overflow: hidden;
   }
 
   .bg-geometric::before {
@@ -243,7 +244,7 @@
     position: absolute;
     left: -20%;
     top: 50%;
-    height: 2px;
+    height: 1px;
     width: 140%;
     transform: translateY(-50%) scaleY(1);
     transform-origin: center;
