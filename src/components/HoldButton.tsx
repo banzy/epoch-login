@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 
 interface HoldButtonProps {
   onComplete: () => void;
@@ -13,52 +13,122 @@ const HoldButton = ({
   children,
   disabled = false 
 }: HoldButtonProps) => {
-  const [isHolding, setIsHolding] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [state, setState] = useState<'idle' | 'running' | 'done'>('idle');
+  const [progress, setProgress] = useState(0);
+  const animRef = useRef<number>(0);
   const startTimeRef = useRef<number>(0);
+  const btnRef = useRef<HTMLDivElement>(null);
+  const particlesRef = useRef<HTMLDivElement>(null);
+
+  const updateProgress = useCallback(() => {
+    const elapsed = Date.now() - startTimeRef.current;
+    const pct = Math.min(elapsed / holdDuration, 1);
+    setProgress(pct);
+
+    if (pct >= 1) {
+      setState('done');
+      spawnParticles();
+      onComplete();
+    } else {
+      animRef.current = requestAnimationFrame(updateProgress);
+    }
+  }, [holdDuration, onComplete]);
 
   const handleStart = useCallback(() => {
-    if (disabled || isComplete) return;
-    
-    setIsHolding(true);
+    if (disabled || state !== 'idle') return;
+    setState('running');
+    setProgress(0);
     startTimeRef.current = Date.now();
-    
-    timerRef.current = setTimeout(() => {
-      setIsComplete(true);
-      setIsHolding(false);
-      onComplete();
-    }, holdDuration);
-  }, [disabled, isComplete, holdDuration, onComplete]);
+    animRef.current = requestAnimationFrame(updateProgress);
+  }, [disabled, state, updateProgress]);
 
   const handleEnd = useCallback(() => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-    setIsHolding(false);
+    if (state !== 'running') return;
+    cancelAnimationFrame(animRef.current);
+    setState('idle');
+    setProgress(0);
+  }, [state]);
+
+  useEffect(() => {
+    return () => cancelAnimationFrame(animRef.current);
   }, []);
 
-  const handleMouseLeave = useCallback(() => {
-    handleEnd();
-  }, [handleEnd]);
+  const spawnParticles = () => {
+    if (!particlesRef.current) return;
+    const container = particlesRef.current;
+    container.innerHTML = '';
+    for (let i = 0; i < 16; i++) {
+      const p = document.createElement('div');
+      p.className = 'hold-particle';
+      const angle = (i / 16) * 360;
+      const dist = 40 + Math.random() * 50;
+      const tx = Math.cos((angle * Math.PI) / 180) * dist;
+      const ty = Math.sin((angle * Math.PI) / 180) * dist;
+      p.style.setProperty('--tx', `${tx}px`);
+      p.style.setProperty('--ty', `${ty}px`);
+      p.style.left = '50%';
+      p.style.top = '50%';
+      container.appendChild(p);
+    }
+  };
+
+  const pctDisplay = Math.round(progress * 100);
+
+  // Convert children to array to get the idle label
+  const childArray = Array.isArray(children) ? children : [children];
 
   return (
-    <button
-      className={`hold-button ${isComplete ? 'hold-button-complete' : ''}`}
+    <div 
+      ref={btnRef}
+      className={`hold-btn-wrap ${state}`}
       onMouseDown={handleStart}
       onMouseUp={handleEnd}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={handleEnd}
       onTouchStart={handleStart}
       onTouchEnd={handleEnd}
-      disabled={disabled}
-      style={{ '--hold-duration': `${holdDuration}ms` } as React.CSSProperties}
     >
-      {isHolding && !isComplete && (
-        <div className="hold-button-progress animate-progress" />
-      )}
-      <span className="relative z-10">{children}</span>
-    </button>
+      <button
+        className="hold-btn"
+        disabled={disabled}
+      >
+        {/* Track */}
+        <div className="hold-btn-track" />
+        
+        {/* Progress fill */}
+        <div 
+          className="hold-btn-fill"
+          style={{ transform: `scaleX(${progress})` }}
+        />
+        
+        {/* Shimmer on fill */}
+        {state === 'running' && (
+          <div 
+            className="hold-btn-shimmer"
+            style={{ transform: `scaleX(${progress})` }}
+          />
+        )}
+        
+        {/* Border ring */}
+        <div className="hold-btn-ring" />
+        
+        {/* Labels */}
+        <div className="hold-btn-labels">
+          <span className="hold-lbl hold-lbl-idle">
+            {childArray}
+          </span>
+          <span className="hold-lbl hold-lbl-run">
+            Verifying
+            <span className="hold-pct">{pctDisplay}%</span>
+          </span>
+          <span className="hold-lbl hold-lbl-done">
+            ✓ Done
+          </span>
+        </div>
+      </button>
+
+      {/* Particles container */}
+      <div ref={particlesRef} className="hold-particles" />
+    </div>
   );
 };
 
