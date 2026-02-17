@@ -11,17 +11,17 @@
 
 @property --hue {
   syntax: '<number>';
-  initial-value: 140;
+  initial-value: 132;
   inherits: true;
 }
 
 @keyframes rainbow-cycle {
   0% {
-    --hue: 0;
+    --hue: 132;
   }
 
   100% {
-    --hue: 360;
+    --hue: 492;
   }
 }
 
@@ -607,6 +607,104 @@
       radial-gradient(ellipse at 20% 30%, hsla(var(--hue), 60%, 40%, 0.04) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 60%, hsla(var(--hue), 60%, 40%, 0.04) 0%, transparent 50%);
     z-index: 0;
+  }
+
+  .dark-boot-scan {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    animation: boot-scan-hide 2.8s ease-out forwards;
+  }
+
+  .dark-boot-scan::before {
+    content: '';
+    position: absolute;
+    left: -20%;
+    top: 50%;
+    width: 140%;
+    height: 2px;
+    transform: translateY(-50%) scaleX(0.1);
+    transform-origin: center;
+    background:
+      linear-gradient(90deg,
+        transparent 0%,
+        hsl(132 100% 62% / 0.7) 20%,
+        hsl(132 100% 76% / 1) 50%,
+        hsl(132 100% 62% / 0.7) 80%,
+        transparent 100%),
+      repeating-linear-gradient(90deg,
+        hsl(132 100% 84% / 0.24) 0 2px,
+        hsl(132 100% 54% / 0.1) 2px 4px);
+    background-blend-mode: screen;
+    box-shadow:
+      0 0 1px 0 hsl(132 100% 85% / 0.95),
+      0 0 22px 8px hsl(132 95% 56% / 0.62),
+      0 0 58px 24px hsl(132 90% 45% / 0.34);
+    animation: boot-line-build 2.8s ease-out forwards;
+  }
+
+  .dark-boot-scan::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 34% 66% at 50% 50%, hsl(132 95% 55% / 0.11) 0%, transparent 72%),
+      radial-gradient(ellipse 52% 30% at 50% 50%, hsl(132 95% 62% / 0.07) 0%, transparent 65%);
+    opacity: 0;
+    animation: boot-glow 2.8s ease-out forwards;
+  }
+
+  @keyframes boot-line-build {
+    0% {
+      opacity: 0;
+      transform: translateY(-50%) scaleX(0.08);
+      filter: blur(0.8px);
+    }
+
+    18% {
+      opacity: 1;
+      transform: translateY(-50%) scaleX(0.55);
+      filter: blur(0);
+    }
+
+    58% {
+      opacity: 0.9;
+      transform: translateY(-50%) scaleX(1);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-50%) scaleX(1);
+    }
+  }
+
+  @keyframes boot-glow {
+    0% {
+      opacity: 0;
+    }
+
+    26% {
+      opacity: 0.85;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes boot-scan-hide {
+
+    0%,
+    88% {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    100% {
+      opacity: 0;
+      visibility: hidden;
+    }
   }
 
   /* Matrix character overlay via repeating background */

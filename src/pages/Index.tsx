@@ -27,6 +27,7 @@ const Index = () => {
       {/* Geometric background pattern (light) / Gradient waves (dark) */}
       <div className="fixed inset-0 bg-geometric dark:bg-none pointer-events-none" />
       <div className="fixed inset-0 hidden dark:block pointer-events-none bg-dark-waves">
+        <div className="dark-boot-scan" />
         <div className="dark-matrix-chars" />
       </div>
       <div className="relative z-10 w-full max-w-sm">
