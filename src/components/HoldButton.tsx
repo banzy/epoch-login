@@ -9,7 +9,7 @@ interface HoldButtonProps {
 
 const HoldButton = ({ 
   onComplete, 
-  holdDuration = 1200, 
+  holdDuration = 600, 
   children,
   disabled = false 
 }: HoldButtonProps) => {
