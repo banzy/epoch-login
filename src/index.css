@@ -206,7 +206,8 @@
 
   .card-ritual {
     @apply rounded-2xl p-10;
-    background: hsl(var(--card) / 0.55);
+    isolation: isolate;
+    background: hsl(var(--card) / 0.85);
     backdrop-filter: blur(40px) saturate(1.8);
     -webkit-backdrop-filter: blur(40px) saturate(1.8);
     border: 1px solid hsl(var(--border) / 0.4);
