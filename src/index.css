@@ -609,35 +609,52 @@
   .dark-boot-scan::after {
     content: '';
     position: absolute;
-    left: 0;
+    left: -20%;
     top: 50%;
     height: 1px;
-    width: 100%;
-    transform: translateY(-50%);
+    width: 140%;
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: left center;
     background: linear-gradient(90deg,
       transparent 0%,
-      hsl(132 100% 55% / 0.7) 10%,
+      hsl(132 100% 55% / 0.7) 15%,
       hsl(132 100% 65% / 1) 50%,
-      hsl(132 100% 55% / 0.7) 90%,
+      hsl(132 100% 55% / 0.7) 85%,
       transparent 100%);
     box-shadow:
       0 0 20px 6px hsl(132 100% 55% / 0.4),
       0 0 50px 16px hsl(132 100% 50% / 0.2);
-    clip-path: inset(0 100% 0 0);
     animation: trail-reveal 2.2s cubic-bezier(0.22, 0.61, 0.36, 1) forwards,
                trail-fade 1s ease-out 2.4s forwards;
   }
 
+  @keyframes dot-sweep {
+    0% {
+      left: -5%;
+      opacity: 0;
+    }
+    8% {
+      opacity: 1;
+    }
+    85% {
+      opacity: 1;
+    }
+    100% {
+      left: 105%;
+      opacity: 0;
+    }
+  }
+
   @keyframes trail-reveal {
     0% {
-      clip-path: inset(0 100% 0 0);
+      transform: translateY(-50%) scaleX(0);
       opacity: 0.8;
     }
     8% {
       opacity: 1;
     }
     100% {
-      clip-path: inset(0 0% 0 0);
+      transform: translateY(-50%) scaleX(1);
       opacity: 1;
     }
   }
