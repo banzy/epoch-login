@@ -23,8 +23,8 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center p-6">
-      {/* Plain light background / Gradient waves (dark) */}
-      <div className="fixed inset-0 z-0 pointer-events-none dark:hidden bg-background" />
+      {/* Geometric light background / Gradient waves (dark) */}
+      <div className="fixed inset-0 z-0 pointer-events-none dark:hidden bg-geometric-hex" />
       <div className="fixed inset-0 z-0 hidden dark:block pointer-events-none bg-dark-waves">
         <div className="dark-boot-scan" />
         <div className="dark-matrix-chars" />

@@ -11,17 +11,17 @@
 
 @property --hue {
   syntax: '<number>';
-  initial-value: 132;
+  initial-value: 48;
   inherits: true;
 }
 
 @keyframes rainbow-cycle {
   0% {
-    --hue: 132;
+    --hue: 48;
   }
 
   100% {
-    --hue: 492;
+    --hue: 408;
   }
 }
 
@@ -258,11 +258,11 @@
   }
 
   .hold-btn-wrap.running .hold-btn-ring {
-    border-color: hsl(140 100% 55% / 0.3);
+    border-color: hsl(48 100% 55% / 0.3);
   }
 
   .hold-btn-wrap.done .hold-btn-ring {
-    border-color: hsl(140 100% 55% / 0.5);
+    border-color: hsl(48 100% 55% / 0.5);
   }
 
   /* ─── Label transitions ─── */
@@ -333,7 +333,7 @@
     @apply absolute rounded-full;
     width: 5px;
     height: 5px;
-    background: hsl(140 100% 55%);
+    background: hsl(48 100% 55%);
     animation: hold-particle-burst 600ms ease-out forwards;
   }
 
@@ -544,7 +544,9 @@
   }
 
   .bg-dark-waves {
-    background: hsl(225 20% 7%);
+    background-color: hsl(225 20% 7%);
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L55 17.5V42.5L30 55L5 42.5V17.5L30 5z' fill='none' stroke='rgba(255, 255, 255, 0.03)' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-size: 60px 60px;
     overflow: hidden;
   }
 
@@ -622,13 +624,13 @@
     transform: translateY(-50%);
     background: linear-gradient(90deg,
         transparent 0%,
-        hsl(132 100% 55% / 0.7) 10%,
-        hsl(132 100% 65% / 1) 50%,
-        hsl(132 100% 55% / 0.7) 90%,
+        hsl(48 100% 55% / 0.7) 10%,
+        hsl(48 100% 65% / 1) 50%,
+        hsl(48 100% 55% / 0.7) 90%,
         transparent 100%);
     box-shadow:
-      0 0 20px 6px hsl(132 100% 55% / 0.4),
-      0 0 50px 16px hsl(132 100% 50% / 0.2);
+      0 0 20px 6px hsl(48 100% 55% / 0.4),
+      0 0 50px 16px hsl(48 100% 50% / 0.2);
     clip-path: inset(0 100% 0 0);
     animation: trail-clip 2.2s cubic-bezier(0.22, 0.61, 0.36, 1) forwards,
       trail-fade 1s ease-out 2.4s forwards;
@@ -696,7 +698,7 @@
   .dark-matrix-chars {
     position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cstyle%3Etext%7Bfont-family:monospace;font-size:10px;fill:%2340806a;opacity:0.15%7D%3C/style%3E%3Ctext x='10' y='15'%3EY%3C/text%3E%3Ctext x='50' y='30'%3EC%3C/text%3E%3Ctext x='90' y='12'%3EK%3C/text%3E%3Ctext x='130' y='45'%3EH%3C/text%3E%3Ctext x='170' y='25'%3ET%3C/text%3E%3Ctext x='25' y='55'%3EW%3C/text%3E%3Ctext x='65' y='70'%3EA%3C/text%3E%3Ctext x='105' y='60'%3EN%3C/text%3E%3Ctext x='145' y='80'%3ED%3C/text%3E%3Ctext x='185' y='65'%3ES%3C/text%3E%3Ctext x='15' y='95'%3EO%3C/text%3E%3Ctext x='55' y='110'%3EU%3C/text%3E%3Ctext x='95' y='100'%3EB%3C/text%3E%3Ctext x='135' y='120'%3EV%3C/text%3E%3Ctext x='175' y='105'%3EG%3C/text%3E%3Ctext x='30' y='140'%3EL%3C/text%3E%3Ctext x='70' y='155'%3EF%3C/text%3E%3Ctext x='110' y='145'%3EP%3C/text%3E%3Ctext x='150' y='165'%3ER%3C/text%3E%3Ctext x='190' y='150'%3EI%3C/text%3E%3Ctext x='20' y='180'%3EQ%3C/text%3E%3Ctext x='60' y='195'%3EX%3C/text%3E%3Ctext x='100' y='185'%3EJ%3C/text%3E%3Ctext x='140' y='198'%3EM%3C/text%3E%3Ctext x='180' y='190'%3EZ%3C/text%3E%3Ctext x='40' y='42'%3ET%3C/text%3E%3Ctext x='80' y='88'%3EE%3C/text%3E%3Ctext x='120' y='135'%3EA%3C/text%3E%3Ctext x='160' y='48'%3EY%3C/text%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cstyle%3Etext%7Bfont-family:monospace;font-size:10px;fill:%23807a40;opacity:0.15%7D%3C/style%3E%3Ctext x='10' y='15'%3EY%3C/text%3E%3Ctext x='50' y='30'%3EC%3C/text%3E%3Ctext x='90' y='12'%3EK%3C/text%3E%3Ctext x='130' y='45'%3EH%3C/text%3E%3Ctext x='170' y='25'%3ET%3C/text%3E%3Ctext x='25' y='55'%3EW%3C/text%3E%3Ctext x='65' y='70'%3EA%3C/text%3E%3Ctext x='105' y='60'%3EN%3C/text%3E%3Ctext x='145' y='80'%3ED%3C/text%3E%3Ctext x='185' y='65'%3ES%3C/text%3E%3Ctext x='15' y='95'%3EO%3C/text%3E%3Ctext x='55' y='110'%3EU%3C/text%3E%3Ctext x='95' y='100'%3EB%3C/text%3E%3Ctext x='135' y='120'%3E V%3C/text%3E%3Ctext x='175' y='105'%3EG%3C/text%3E%3Ctext x='30' y='140'%3EL%3C/text%3E%3Ctext x='70' y='155'%3EF%3C/text%3E%3Ctext x='110' y='145'%3EP%3C/text%3E%3Ctext x='150' y='165'%3ER%3C/text%3E%3Ctext x='190' y='150'%3EI%3C/text%3E%3Ctext x='20' y='180'%3EQ%3C/text%3E%3Ctext x='60' y='195'%3EX%3C/text%3E%3Ctext x='100' y='185'%3EJ%3C/text%3E%3Ctext x='140' y='198'%3EM%3C/text%3E%3Ctext x='180' y='190'%3EZ%3C/text%3E%3Ctext x='40' y='42'%3ET%3C/text%3E%3Ctext x='80' y='88'%3EE%3C/text%3E%3Ctext x='120' y='135'%3EA%3C/text%3E%3Ctext x='160' y='48'%3EY%3C/text%3E%3C/svg%3E");
     background-size: 200px 200px;
     opacity: 0.6;
     z-index: 0;
