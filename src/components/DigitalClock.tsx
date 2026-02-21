@@ -1,15 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useServerTime } from '@/hooks/useServerTime';
 
 const DigitalClock = () => {
-  const [time, setTime] = useState(new Date());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const { time } = useServerTime();
 
   const hours = time.getHours().toString().padStart(2, '0');
   const minutes = time.getMinutes().toString().padStart(2, '0');

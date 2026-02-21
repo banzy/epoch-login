@@ -4,12 +4,15 @@ import DigitalClock from '@/components/DigitalClock';
 import HoldButton from '@/components/HoldButton';
 import ThemeToggle from '@/components/ThemeToggle';
 
+import { useServerTime } from '@/hooks/useServerTime';
+
 const Index = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'processing' | 'success'>('idle');
+  const { isSynced } = useServerTime();
 
   const handleLogin = useCallback(() => {
-    if (!email.trim()) return;
+    if (!email.trim() || !isSynced) return;
     
     setStatus('processing');
     
@@ -17,7 +20,7 @@ const Index = () => {
     setTimeout(() => {
       setStatus('success');
     }, 800);
-  }, [email]);
+  }, [email, isSynced]);
 
   const isValidEmail = email.includes('@') && email.includes('.');
 
@@ -39,9 +42,10 @@ const Index = () => {
 
           {/* System status */}
           <p className="text-center text-xs font-medium tracking-[0.25em] text-whisper mb-12 uppercase">
-            {status === 'idle' && 'System Ready'}
-            {status === 'processing' && 'Verifying'}
-            {status === 'success' && 'Access Granted'}
+            {!isSynced && 'Out of Sync'}
+            {isSynced && status === 'idle' && 'System Ready'}
+            {isSynced && status === 'processing' && 'Verifying'}
+            {isSynced && status === 'success' && 'Access Granted'}
           </p>
 
           {/* Form */}
@@ -55,7 +59,7 @@ const Index = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Identity"
                 className="input-underline"
-                disabled={status !== 'idle'}
+                disabled={status !== 'idle' || !isSynced}
                 autoComplete="email"
                 autoFocus
               />
@@ -65,20 +69,22 @@ const Index = () => {
             <div className="flex items-start gap-3">
               <Info className="w-4 h-4 text-whisper flex-shrink-0 mt-0.5" />
               <p className="text-sm text-whisper leading-relaxed">
-                {status === 'idle' && 'Secure logging system'}
-                {status === 'processing' && 'Temporal verification in progress.'}
-                {status === 'success' && 'Identity confirmed. Welcome back.'}
+                {!isSynced && 'Connection to temporal server lost. Login restricted.'}
+                {isSynced && status === 'idle' && 'Secure logging system'}
+                {isSynced && status === 'processing' && 'Temporal verification in progress.'}
+                {isSynced && status === 'success' && 'Identity confirmed. Welcome back.'}
               </p>
             </div>
 
             <HoldButton 
               onComplete={handleLogin}
               holdDuration={2000}
-              disabled={!isValidEmail || status !== 'idle'}
+              disabled={!isValidEmail || status !== 'idle' || !isSynced}
             >
-              {status === 'idle' && 'Log in'}
-              {status === 'processing' && 'Verifying...'}
-              {status === 'success' && 'Access Granted'}
+              {!isSynced && 'Syncing...'}
+              {isSynced && status === 'idle' && 'Log in'}
+              {isSynced && status === 'processing' && 'Verifying...'}
+              {isSynced && status === 'success' && 'Access Granted'}
             </HoldButton>
           </div>
         </div>
