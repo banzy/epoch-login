@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Epoch Login Vanilla</title>
+
+  <!-- Tailwind CDN & Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            clock: ['Space Grotesk', 'monospace'],
+          },
+          colors: {
+            border: "hsl(var(--border))",
+            background: "hsl(var(--background))",
+            foreground: "hsl(var(--foreground))",
+            card: "hsl(var(--card))",
+            clock: {
+              primary: "hsl(var(--clock-primary))",
+              seconds: "hsl(var(--clock-seconds))",
+              separator: "hsl(var(--clock-separator))",
+            },
+            whisper: "hsl(var(--text-whisper))",
+          },
+          boxShadow: {
+            soft: "var(--shadow-soft)",
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="seclog.css">
+</head>
+<body class="bg-background text-foreground antialiased">
+  <div class="relative min-h-screen flex items-center justify-center p-6">
+    <!-- Geometric light background / Gradient waves (dark) -->
+    <div class="fixed inset-0 z-0 pointer-events-none dark:hidden bg-geometric-hex"></div>
+    <div class="fixed inset-0 z-0 hidden dark:block pointer-events-none bg-dark-waves">
+      <div class="dark-boot-scan"></div>
+      <div class="dark-matrix-chars"></div>
+    </div>
+
+    <div class="relative z-10 w-full max-w-sm">
+      <div class="card-ritual">
+        
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="absolute top-[14px] right-[14px] z-50 p-2.5 rounded-full bg-card border border-border shadow-soft transition-all duration-300 hover:scale-110" aria-label="Toggle theme">
+          <i id="theme-sun" data-lucide="sun" class="w-[18px] h-[18px] text-foreground transition-transform duration-300 rotate-0"></i>
+          <i id="theme-moon" data-lucide="moon" class="w-[18px] h-[18px] text-foreground transition-transform duration-300 rotate-0" style="display: none;"></i>
+        </button>
+
+        <!-- Clock -->
+        <div class="flex justify-center mb-3">
+          <div class="font-clock font-medium tracking-tight select-none flex items-baseline justify-center clock-enter">
+            <span id="clock-h" class="clock-digit text-clock-primary md:text-6xl font-mono text-4xl">00</span>
+            <span class="clock-separator md:text-6xl mx-1 text-4xl">:</span>
+            <span id="clock-m" class="clock-digit text-clock-primary md:text-6xl font-mono text-4xl">00</span>
+            <span class="clock-separator md:text-3xl mx-1.5 self-end mb-1.5 text-4xl">:</span>
+            <span id="clock-s" class="clock-digit clock-seconds md:text-3xl self-end mb-1.5 text-2xl font-mono">00</span>
+          </div>
+        </div>
+
+        <!-- System status -->
+        <p id="status-text" class="text-center text-xs font-medium tracking-[0.25em] text-whisper mb-12 uppercase">
+          System Ready
+        </p>
+
+        <!-- Form -->
+        <div class="space-y-8">
+          <!-- Email input with icon -->
+          <div class="flex items-center gap-3 border-b border-border pb-3">
+            <i data-lucide="mail" class="w-5 h-5 text-whisper flex-shrink-0"></i>
+            <input
+              id="email-input"
+              type="email"
+              placeholder="Identity"
+              class="input-underline"
+              autocomplete="email"
+              autofocus
+            />
+          </div>
+
+          <!-- Microcopy -->
+          <div class="flex items-start gap-3">
+            <i data-lucide="info" class="w-4 h-4 text-whisper flex-shrink-0 mt-0.5"></i>
+            <p id="microcopy-text" class="text-sm text-whisper leading-relaxed">
+              Secure logging system
+            </p>
+          </div>
+
+          <!-- Hold Button -->
+          <div id="hold-wrap" class="hold-btn-wrap idle">
+            <button id="hold-trigger" class="hold-btn" disabled>
+              <div class="hold-btn-track"></div>
+              <div id="hold-fill" class="hold-btn-fill"></div>
+              <div id="hold-shimmer" class="hold-btn-shimmer"></div>
+              <div class="hold-btn-ring"></div>
+
+              <div class="hold-btn-labels">
+                <span class="hold-lbl hold-lbl-idle">
+                  <span id="hold-lbl-idle-text">Log in</span>
+                </span>
+                <span class="hold-lbl hold-lbl-run">
+                  Verifying
+                  <span id="hold-pct" class="hold-pct">0%</span>
+                </span>
+                <span class="hold-lbl hold-lbl-done">
+                  ✓ Done
+                </span>
+              </div>
+            </button>
+            <div id="hold-particles" class="hold-particles"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="flex items-center justify-center gap-2 mt-8 opacity-50">
+        <i data-lucide="shield-check" class="w-4 h-4 text-whisper"></i>
+        <p class="text-xs text-whisper font-medium tracking-[0.2em] uppercase">
+          Secure Enclave
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Icons & Logic -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+  <script src="seclog.js"></script>
+</body>
+</html>
